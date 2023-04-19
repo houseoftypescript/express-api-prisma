@@ -1,0 +1,20 @@
+{
+  "entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/modules/**/*.controller.ts"],
+  "spec": {
+    "outputDirectory": "docs/swagger",
+    "specVersion": 3,
+    "spec": {
+      "servers": [
+        {
+          "url": "http://localhost:8080",
+          "description": "Local"
+        }
+      ]
+    }
+  },
+  "routes": {
+    "routesDir": "src"
+  }
+}

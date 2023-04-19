@@ -1,0 +1,58 @@
+{
+  "item": [
+    {
+      "id": "b97f33b6-85c0-4668-a851-b2ec75ec9195",
+      "name": "Get Health",
+      "request": {
+        "name": "Get Health",
+        "description": {},
+        "url": {
+          "path": ["health"],
+          "host": ["{{baseUrl}}"],
+          "query": [],
+          "variable": []
+        },
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "0a0227d3-1655-48a5-bdfe-dd12a7d944ad",
+          "name": "Ok",
+          "originalRequest": {
+            "url": {
+              "path": ["health"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"status\": \"sit incididunt velit\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": { "disableBodyPruning": true }
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "type": "string", "value": "http://localhost:8080", "key": "baseUrl" }
+  ],
+  "info": {
+    "_postman_id": "abb5e0fc-c760-4398-b656-8f54254c8028",
+    "name": "@express/apis",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Express Template - APIs\n\nContact Support:\n Name: hieudoanm \n Email: hieumdoan@gmail.com",
+      "type": "text/plain"
+    }
+  }
+}
