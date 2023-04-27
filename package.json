@@ -22,7 +22,7 @@
     "docs:postman": "openapi2postmanv2 -s docs/swagger/swagger.yaml -o docs/postman/collection.json",
     "docs:swagger:json": "tsoa spec-and-routes",
     "docs:swagger:yaml": "json2yaml ./docs/swagger/swagger.json > ./docs/swagger/swagger.yaml",
-    "docs:swagger:html": "redoc-cli build ./docs/swagger/swagger.json --output ./public/index.html --title \"Express APIs\"",
+    "docs:swagger:html": "redocly build-docs ./docs/swagger/swagger.json --output ./public/index.html --title 'Express.js - API - Template'",
     "lint": "eslint . --fix --ext .ts",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -43,6 +43,7 @@
     "tsoa": "5.1.1"
   },
   "devDependencies": {
+    "@redocly/cli": "1.0.0-beta.125",
     "@types/compression": "1.7.2",
     "@types/cookie-parser": "1.4.3",
     "@types/cors": "2.8.13",
@@ -65,7 +66,6 @@
     "prettier": "2.8.8",
     "pretty-quick": "3.1.3",
     "prisma": "4.13.0",
-    "redoc-cli": "0.13.21",
     "supertest": "6.3.3",
     "ts-jest": "29.1.0",
     "ts-loader": "9.4.2",
