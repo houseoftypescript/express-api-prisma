@@ -5701,10 +5701,10 @@ openapi-sampler@^1.3.0:
     "@types/json-schema" "^7.0.7"
     json-pointer "0.6.2"
 
-openapi-to-postmanv2@4.11.0:
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/openapi-to-postmanv2/-/openapi-to-postmanv2-4.11.0.tgz#f1281accf010df746b0b92a6b77aa16ceaba42a3"
-  integrity sha512-r7r81V5BGNx6jBT96Hfhfv7iRy735UsIUYDfBv1blJ5qfS0+tJ0lXBnTJlrBhb4Y9ztaFGCek7/LFdMnqjFVRQ==
+openapi-to-postmanv2@4.12.0:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/openapi-to-postmanv2/-/openapi-to-postmanv2-4.12.0.tgz#bc6b2476e4d7ef0a9a945c423bafa68064418a22"
+  integrity sha512-bItgckkDx+HDKMxz7LN/V97mor+GbZKui2YaDOWAmKjxeL/7LpvO3hrn7p/MvV8F8hW0lXOEPC256so7a2yk+w==
   dependencies:
     ajv "8.1.0"
     ajv-formats "2.1.1"
