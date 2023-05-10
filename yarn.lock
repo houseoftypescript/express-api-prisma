@@ -967,12 +967,12 @@
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-"@redocly/cli@1.0.0-beta.125":
-  version "1.0.0-beta.125"
-  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.0.0-beta.125.tgz#3b107579193572289b264fb12edc2127e3175dbe"
-  integrity sha512-3n5wtCux2vtWdxPvLs5nvbiYiEz+gkAPs/1kC/df7tzBOZ3zld6onrwuBjhMKtzJbJ1B3i1yzrfJz0mMmoNrtQ==
+"@redocly/cli@1.0.0-beta.126":
+  version "1.0.0-beta.126"
+  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.0.0-beta.126.tgz#0ed7ea5bae1963ea7a077f28395aa9e154299cb4"
+  integrity sha512-GljpdQrzMmmZ6hEa4rdRuylSGAiMT5XF4tp/eDIPI9g8THVfyKFL2BLuSmnQ0We93wLOA3ASUZmG9jH6t6DpmQ==
   dependencies:
-    "@redocly/openapi-core" "1.0.0-beta.125"
+    "@redocly/openapi-core" "1.0.0-beta.126"
     assert-node-version "^1.0.3"
     chokidar "^3.5.1"
     colorette "^1.2.0"
@@ -988,7 +988,23 @@
     styled-components "5.3.3"
     yargs "17.0.1"
 
-"@redocly/openapi-core@1.0.0-beta.125", "@redocly/openapi-core@^1.0.0-beta.104":
+"@redocly/openapi-core@1.0.0-beta.126":
+  version "1.0.0-beta.126"
+  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.0.0-beta.126.tgz#6a1ba25fb02b8aa5e7a591390b809fe65ab247af"
+  integrity sha512-09oIEh3zBio2CqJz4ERVuJ6KVG7q9LdjU5g7VG4+VSR91mrEA//lkcuZLoSJHvMJfcBWKR3AfYuuvaDijuszCg==
+  dependencies:
+    "@redocly/ajv" "^8.11.0"
+    "@types/node" "^14.11.8"
+    colorette "^1.2.0"
+    js-levenshtein "^1.1.6"
+    js-yaml "^4.1.0"
+    lodash.isequal "^4.5.0"
+    minimatch "^5.0.1"
+    node-fetch "^2.6.1"
+    pluralize "^8.0.0"
+    yaml-ast-parser "0.0.43"
+
+"@redocly/openapi-core@^1.0.0-beta.104":
   version "1.0.0-beta.125"
   resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.0.0-beta.125.tgz#a87b7cbbbd1cef2206bcc2c6c7b498f07378466b"
   integrity sha512-3kpvIP6nzqrXl59BXovm1aGcbqSJv37t9kjFxuEvsGZzVSUC8rGZl4tNEZ3Qfm+mbPs+XWDi/U43kf/u3bUCpw==
