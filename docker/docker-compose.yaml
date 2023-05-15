@@ -1,0 +1,35 @@
+version: '3.5'
+
+volumes:
+  cockroach_data:
+    driver: local
+  mongodb_data:
+    driver: local
+
+services:
+  cockroachdb-express:
+    image: cockroachdb/cockroach:v19.2.2
+    container_name: cockroachdb-express
+    restart: always
+    volumes:
+      - cockroach_data:/cockroach/cockroach-data
+    ports:
+      - 26257:26257
+      - 8080:8080
+    command: start-single-node --insecure
+
+  mongodb-express:
+    image: mongo:6-jammy
+    container_name: mongodb-express
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - '27017:27017'
+
+  mysql-express:
+    image: mysql:8.0.33
+    container_name: mysql-express
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example

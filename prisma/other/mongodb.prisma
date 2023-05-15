@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRESQL_URL")
+  provider = "mongodb"
+  url      = env("MONGODB_URL")
 }
 
 model User {
-  id       String @id
+  id       String @id @map("_id")
   email    String @unique
   username String @unique
   password String
@@ -16,7 +16,7 @@ model User {
 }
 
 model List {
-  id      String  @id
+  id      String  @id @map("_id")
   title   String
   primary Boolean
   user    User    @relation(fields: [userId], references: [id])
@@ -27,7 +27,7 @@ model List {
 }
 
 model Task {
-  id          String  @id
+  id          String  @id @map("_id")
   title       String
   description String
   completed   Boolean
