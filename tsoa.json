@@ -12,7 +12,27 @@
           "description": "Local"
         }
       ]
+    },
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "access_token",
+        "in": "query"
+      },
+      "tsoa_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+        "flow": "implicit",
+        "scopes": {
+          "lists:read": "read lists",
+          "lists:write": "modify lists",
+          "tasks:read": "read tasks",
+          "tasks:write": "modify tasks",
+          "users:read": "read users",
+          "users:write": "modify users"
+        }
+      }
     }
   },
-  "routes": { "routesDir": "src" }
+  "routes": { "authenticationModule": "src/common/middlewares/authentication/index.ts", "routesDir": "src" }
 }

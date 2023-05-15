@@ -16,16 +16,12 @@ export const getTasks = async () => {
 
 export const createTask = async ({ title, description = '', listId }: TaskRequest): Promise<Task> => {
   const id = v4();
-  const task: Task = await prismaClient.task.create({
-    data: { id, title, description, completed: false, listId },
-  });
+  const task: Task = await prismaClient.task.create({ data: { id, title, description, completed: false, listId } });
   return task;
 };
 
 export const getTask = async (id: string): Promise<Task> => {
-  const task: Task = await prismaClient.task.findFirstOrThrow({
-    where: { id },
-  });
+  const task: Task = await prismaClient.task.findFirstOrThrow({ where: { id } });
   return task;
 };
 
@@ -33,10 +29,7 @@ export const updateTask = async (
   id: string,
   { title, description = '', completed = false, listId }: TaskRequest
 ): Promise<Task> => {
-  const task: Task = await prismaClient.task.update({
-    data: { title, description, completed, listId },
-    where: { id },
-  });
+  const task: Task = await prismaClient.task.update({ data: { title, description, completed, listId }, where: { id } });
   return task;
 };
 

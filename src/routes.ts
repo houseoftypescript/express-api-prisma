@@ -19,6 +19,9 @@ import { ListsController } from './modules/lists/lists.controller';
 import { TasksController } from './modules/tasks/tasks.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UsersController } from './modules/users/users.controller';
+import { expressAuthentication } from './common/middlewares/authentication/index';
+// @ts-ignore - no great way to install types from subpackage
+const promiseAny = require('promise.any');
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -51,10 +54,7 @@ const models: TsoaRoute.Models = {
     dataType: 'refAlias',
     type: {
       dataType: 'nestedObjectLiteral',
-      nestedProperties: {
-        userId: { dataType: 'string', required: true },
-        title: { dataType: 'string', required: true },
-      },
+      nestedProperties: { title: { dataType: 'string', required: true } },
       validators: {},
     },
   },
@@ -149,6 +149,7 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
     '/lists',
+    authenticateMiddleware([{ jwt: ['lists:read'] }]),
     ...fetchMiddlewares<RequestHandler>(ListsController),
     ...fetchMiddlewares<RequestHandler>(ListsController.prototype.getLists),
 
@@ -171,34 +172,9 @@ export function RegisterRoutes(app: Router) {
     }
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  app.post(
-    '/lists',
-    ...fetchMiddlewares<RequestHandler>(ListsController),
-    ...fetchMiddlewares<RequestHandler>(ListsController.prototype.createList),
-
-    function ListsController_createList(request: any, response: any, next: any) {
-      const args = {
-        undefined: { in: 'body', required: true, ref: 'ListRequest' },
-      };
-
-      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-      let validatedArgs: any[] = [];
-      try {
-        validatedArgs = getValidatedArgs(args, request, response);
-
-        const controller = new ListsController();
-
-        const promise = controller.createList.apply(controller, validatedArgs as any);
-        promiseHandler(controller, promise, response, undefined, next);
-      } catch (err) {
-        return next(err);
-      }
-    }
-  );
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
     '/lists/:id',
+    authenticateMiddleware([{ jwt: ['lists:read'] }]),
     ...fetchMiddlewares<RequestHandler>(ListsController),
     ...fetchMiddlewares<RequestHandler>(ListsController.prototype.getList),
 
@@ -223,13 +199,43 @@ export function RegisterRoutes(app: Router) {
     }
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/lists',
+    authenticateMiddleware([{ jwt: ['lists:write'] }]),
+    ...fetchMiddlewares<RequestHandler>(ListsController),
+    ...fetchMiddlewares<RequestHandler>(ListsController.prototype.createList),
+
+    function ListsController_createList(request: any, response: any, next: any) {
+      const args = {
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
+        undefined: { in: 'body', required: true, ref: 'ListRequest' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ListsController();
+
+        const promise = controller.createList.apply(controller, validatedArgs as any);
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.patch(
     '/lists/:id',
+    authenticateMiddleware([{ jwt: ['lists:write'] }]),
     ...fetchMiddlewares<RequestHandler>(ListsController),
     ...fetchMiddlewares<RequestHandler>(ListsController.prototype.updateList),
 
     function ListsController_updateList(request: any, response: any, next: any) {
       const args = {
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
         id: { in: 'path', name: 'id', required: true, dataType: 'string' },
         undefined: { in: 'body', required: true, ref: 'ListRequest' },
       };
@@ -252,11 +258,13 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.delete(
     '/lists/:id',
+    authenticateMiddleware([{ jwt: ['lists:write'] }]),
     ...fetchMiddlewares<RequestHandler>(ListsController),
     ...fetchMiddlewares<RequestHandler>(ListsController.prototype.deleteList),
 
     function ListsController_deleteList(request: any, response: any, next: any) {
       const args = {
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
         id: { in: 'path', name: 'id', required: true, dataType: 'string' },
       };
 
@@ -278,6 +286,7 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
     '/tasks',
+    authenticateMiddleware([{ jwt: ['tasks:read'] }]),
     ...fetchMiddlewares<RequestHandler>(TasksController),
     ...fetchMiddlewares<RequestHandler>(TasksController.prototype.getTasks),
 
@@ -302,6 +311,7 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.post(
     '/tasks',
+    authenticateMiddleware([{ jwt: ['tasks:write'] }]),
     ...fetchMiddlewares<RequestHandler>(TasksController),
     ...fetchMiddlewares<RequestHandler>(TasksController.prototype.createTask),
 
@@ -328,6 +338,7 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
     '/tasks/:id',
+    authenticateMiddleware([{ jwt: ['tasks:read'] }]),
     ...fetchMiddlewares<RequestHandler>(TasksController),
     ...fetchMiddlewares<RequestHandler>(TasksController.prototype.getTask),
 
@@ -354,6 +365,7 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.patch(
     '/tasks/:id',
+    authenticateMiddleware([{ jwt: ['tasks:write'] }]),
     ...fetchMiddlewares<RequestHandler>(TasksController),
     ...fetchMiddlewares<RequestHandler>(TasksController.prototype.updateTask),
 
@@ -381,6 +393,7 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.delete(
     '/tasks/:id',
+    authenticateMiddleware([{ jwt: ['tasks:write'] }]),
     ...fetchMiddlewares<RequestHandler>(TasksController),
     ...fetchMiddlewares<RequestHandler>(TasksController.prototype.deleteTask),
 
@@ -406,7 +419,7 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.post(
-    '/users/sign-up',
+    '/user/sign-up',
     ...fetchMiddlewares<RequestHandler>(UsersController),
     ...fetchMiddlewares<RequestHandler>(UsersController.prototype.signUp),
 
@@ -432,7 +445,7 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.post(
-    '/users/sign-in',
+    '/user/sign-in',
     ...fetchMiddlewares<RequestHandler>(UsersController),
     ...fetchMiddlewares<RequestHandler>(UsersController.prototype.signIn),
 
@@ -458,13 +471,14 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
-    '/users/:id',
+    '/user',
+    authenticateMiddleware([{ jwt: ['users:read'] }]),
     ...fetchMiddlewares<RequestHandler>(UsersController),
     ...fetchMiddlewares<RequestHandler>(UsersController.prototype.getUser),
 
     function UsersController_getUser(request: any, response: any, next: any) {
       const args = {
-        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
       };
 
       // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -484,13 +498,14 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.delete(
-    '/users/:id',
+    '/user',
+    authenticateMiddleware([{ jwt: ['users:write'] }]),
     ...fetchMiddlewares<RequestHandler>(UsersController),
     ...fetchMiddlewares<RequestHandler>(UsersController.prototype.deleteUser),
 
     function UsersController_deleteUser(request: any, response: any, next: any) {
       const args = {
-        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
       };
 
       // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -510,13 +525,14 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.patch(
-    '/users/:id/username',
+    '/user/username',
+    authenticateMiddleware([{ jwt: ['users:write'] }]),
     ...fetchMiddlewares<RequestHandler>(UsersController),
     ...fetchMiddlewares<RequestHandler>(UsersController.prototype.updateUsername),
 
     function UsersController_updateUsername(request: any, response: any, next: any) {
       const args = {
-        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
         undefined: { in: 'body', required: true, ref: 'UserRequest' },
       };
 
@@ -537,13 +553,14 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.patch(
-    '/users/:id/password',
+    '/user/password',
+    authenticateMiddleware([{ jwt: ['users:write'] }]),
     ...fetchMiddlewares<RequestHandler>(UsersController),
     ...fetchMiddlewares<RequestHandler>(UsersController.prototype.updatePassword),
 
     function UsersController_updatePassword(request: any, response: any, next: any) {
       const args = {
-        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+        request: { in: 'request', name: 'request', required: true, dataType: 'object' },
         undefined: { in: 'body', required: true, ref: 'UserRequest' },
       };
 
@@ -565,6 +582,60 @@ export function RegisterRoutes(app: Router) {
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+  function authenticateMiddleware(security: TsoaRoute.Security[] = []) {
+    return async function runAuthenticationMiddleware(request: any, _response: any, next: any) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      // keep track of failed auth attempts so we can hand back the most
+      // recent one.  This behavior was previously existing so preserving it
+      // here
+      const failedAttempts: any[] = [];
+      const pushAndRethrow = (error: any) => {
+        failedAttempts.push(error);
+        throw error;
+      };
+
+      const secMethodOrPromises: Promise<any>[] = [];
+      for (const secMethod of security) {
+        if (Object.keys(secMethod).length > 1) {
+          const secMethodAndPromises: Promise<any>[] = [];
+
+          for (const name in secMethod) {
+            secMethodAndPromises.push(expressAuthentication(request, name, secMethod[name]).catch(pushAndRethrow));
+          }
+
+          // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+          secMethodOrPromises.push(
+            Promise.all(secMethodAndPromises).then((users) => {
+              return users[0];
+            })
+          );
+        } else {
+          for (const name in secMethod) {
+            secMethodOrPromises.push(expressAuthentication(request, name, secMethod[name]).catch(pushAndRethrow));
+          }
+        }
+      }
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      try {
+        request['user'] = await promiseAny.call(Promise, secMethodOrPromises);
+        next();
+      } catch (err) {
+        // Show most recent error as response
+        const error = failedAttempts.pop();
+        error.status = error.status || 401;
+        next(error);
+      }
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    };
+  }
 
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 

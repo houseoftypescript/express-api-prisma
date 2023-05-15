@@ -1,9 +1,9 @@
 import { User } from '@prisma/client';
-import { Body, Controller, Delete, Get, Patch, Path, Post, Route, Tags } from 'tsoa';
+import { Body, Controller, Delete, Get, Patch, Path, Post, Request, Route, Security, Tags } from 'tsoa';
 import { UserRequest, deleteUser, getUser, signIn, signUp, updatePassword, updateUsername } from './users.service';
 
-@Route('/users')
-@Tags('Users')
+@Route('/user')
+@Tags('User')
 export class UsersController extends Controller {
   @Post('sign-up')
   async signUp(@Body() { username, password }: UserRequest): Promise<User> {
@@ -11,27 +11,35 @@ export class UsersController extends Controller {
   }
 
   @Post('sign-in')
-  async signIn(@Body() { username, password }: UserRequest): Promise<User> {
+  async signIn(@Body() { username, password }: UserRequest): Promise<{ token: string }> {
     return signIn({ username, password });
   }
 
-  @Get('{id}')
-  async getUser(@Path() id: string): Promise<User> {
-    return getUser(id);
+  @Security('jwt', ['users:read'])
+  @Get()
+  async getUser(@Request() request: { user_id: string }): Promise<User> {
+    const { user_id } = request;
+    return getUser(user_id);
   }
 
-  @Delete('{id}')
-  async deleteUser(@Path() id: string): Promise<{ deleted: boolean }> {
-    return deleteUser(id);
+  @Security('jwt', ['users:write'])
+  @Delete()
+  async deleteUser(@Request() request: { user_id: string }): Promise<{ deleted: boolean }> {
+    const { user_id } = request;
+    return deleteUser(user_id);
   }
 
-  @Patch('{id}/username')
-  async updateUsername(@Path() id: string, @Body() { username }: UserRequest): Promise<User> {
-    return updateUsername(id, username);
+  @Security('jwt', ['users:write'])
+  @Patch('username')
+  async updateUsername(@Request() request: { user_id: string }, @Body() { username }: UserRequest): Promise<User> {
+    const { user_id } = request;
+    return updateUsername(user_id, username);
   }
 
-  @Patch('{id}/password')
-  async updatePassword(@Path() id: string, @Body() { password }: UserRequest): Promise<User> {
-    return updatePassword(id, password);
+  @Security('jwt', ['users:write'])
+  @Patch('password')
+  async updatePassword(@Request() request: { user_id: string }, @Body() { password }: UserRequest): Promise<User> {
+    const { user_id } = request;
+    return updatePassword(user_id, password);
   }
 }

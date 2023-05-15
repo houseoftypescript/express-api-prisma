@@ -1,208 +1,53 @@
 {
   "item": [
     {
-      "name": "users",
+      "name": "user",
       "description": "",
       "item": [
         {
-          "name": "{id}",
+          "name": "username",
           "description": "",
           "item": [
             {
-              "name": "username",
-              "description": "",
-              "item": [
-                {
-                  "id": "2271a64a-86f3-4e2b-891b-d78f61a9e72f",
-                  "name": "Update Username",
-                  "request": {
-                    "name": "Update Username",
-                    "description": {},
-                    "url": {
-                      "path": ["users", ":id", "username"],
-                      "host": ["{{baseUrl}}"],
-                      "query": [],
-                      "variable": [{ "type": "any", "value": "<string>", "key": "id", "disabled": false }]
-                    },
-                    "header": [
-                      { "key": "Content-Type", "value": "application/json" },
-                      { "key": "Accept", "value": "application/json" }
-                    ],
-                    "method": "PATCH",
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
-                      "options": { "raw": { "headerFamily": "json", "language": "json" } }
-                    },
-                    "auth": null
-                  },
-                  "response": [
-                    {
-                      "id": "ad2ce82d-47a2-4a8a-a2e4-0f40f2d7df98",
-                      "name": "Ok",
-                      "originalRequest": {
-                        "url": {
-                          "path": ["users", ":id", "username"],
-                          "host": ["{{baseUrl}}"],
-                          "query": [],
-                          "variable": []
-                        },
-                        "header": [
-                          { "key": "Content-Type", "value": "application/json" },
-                          { "key": "Accept", "value": "application/json" }
-                        ],
-                        "method": "PATCH",
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
-                          "options": { "raw": { "headerFamily": "json", "language": "json" } }
-                        }
-                      },
-                      "status": "OK",
-                      "code": 200,
-                      "header": [{ "key": "Content-Type", "value": "application/json" }],
-                      "body": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\",\n  \"id\": \"<string>\"\n}",
-                      "cookie": [],
-                      "_postman_previewlanguage": "json"
-                    }
-                  ],
-                  "event": [],
-                  "protocolProfileBehavior": { "disableBodyPruning": true }
-                }
-              ]
-            },
-            {
-              "name": "password",
-              "description": "",
-              "item": [
-                {
-                  "id": "a6235ee3-2c7d-463d-8a5e-06ec1145c507",
-                  "name": "Update Password",
-                  "request": {
-                    "name": "Update Password",
-                    "description": {},
-                    "url": {
-                      "path": ["users", ":id", "password"],
-                      "host": ["{{baseUrl}}"],
-                      "query": [],
-                      "variable": [{ "type": "any", "value": "<string>", "key": "id", "disabled": false }]
-                    },
-                    "header": [
-                      { "key": "Content-Type", "value": "application/json" },
-                      { "key": "Accept", "value": "application/json" }
-                    ],
-                    "method": "PATCH",
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
-                      "options": { "raw": { "headerFamily": "json", "language": "json" } }
-                    },
-                    "auth": null
-                  },
-                  "response": [
-                    {
-                      "id": "e2d44b27-9ce1-4daf-89e6-695af441b7c0",
-                      "name": "Ok",
-                      "originalRequest": {
-                        "url": {
-                          "path": ["users", ":id", "password"],
-                          "host": ["{{baseUrl}}"],
-                          "query": [],
-                          "variable": []
-                        },
-                        "header": [
-                          { "key": "Content-Type", "value": "application/json" },
-                          { "key": "Accept", "value": "application/json" }
-                        ],
-                        "method": "PATCH",
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
-                          "options": { "raw": { "headerFamily": "json", "language": "json" } }
-                        }
-                      },
-                      "status": "OK",
-                      "code": 200,
-                      "header": [{ "key": "Content-Type", "value": "application/json" }],
-                      "body": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\",\n  \"id\": \"<string>\"\n}",
-                      "cookie": [],
-                      "_postman_previewlanguage": "json"
-                    }
-                  ],
-                  "event": [],
-                  "protocolProfileBehavior": { "disableBodyPruning": true }
-                }
-              ]
-            },
-            {
-              "id": "5c2ae2ce-5b3c-4514-9398-8ab6566c32dc",
-              "name": "Get User",
+              "id": "c3ee7eb6-0f39-454d-ac42-eea458f178b9",
+              "name": "Update Username",
               "request": {
-                "name": "Get User",
+                "name": "Update Username",
                 "description": {},
-                "url": {
-                  "path": ["users", ":id"],
-                  "host": ["{{baseUrl}}"],
-                  "query": [],
-                  "variable": [{ "type": "any", "value": "<string>", "key": "id", "disabled": false }]
+                "url": { "path": ["user", "username"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Accept", "value": "application/json" }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
+                  "options": { "raw": { "headerFamily": "json", "language": "json" } }
                 },
-                "header": [{ "key": "Accept", "value": "application/json" }],
-                "method": "GET",
-                "body": {},
-                "auth": null
+                "auth": []
               },
               "response": [
                 {
-                  "id": "94239af6-1422-4410-b0b8-5cca3970f8b2",
+                  "id": "c179b27a-4f02-45db-b9ab-c038c8196460",
                   "name": "Ok",
                   "originalRequest": {
-                    "url": { "path": ["users", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
-                    "header": [{ "key": "Accept", "value": "application/json" }],
-                    "method": "GET",
-                    "body": {}
+                    "url": { "path": ["user", "username"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                    "header": [
+                      { "key": "Content-Type", "value": "application/json" },
+                      { "key": "Accept", "value": "application/json" }
+                    ],
+                    "method": "PATCH",
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
+                      "options": { "raw": { "headerFamily": "json", "language": "json" } }
+                    }
                   },
                   "status": "OK",
                   "code": 200,
                   "header": [{ "key": "Content-Type", "value": "application/json" }],
                   "body": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\",\n  \"id\": \"<string>\"\n}",
-                  "cookie": [],
-                  "_postman_previewlanguage": "json"
-                }
-              ],
-              "event": [],
-              "protocolProfileBehavior": { "disableBodyPruning": true }
-            },
-            {
-              "id": "29e8d721-8d5d-46c1-bf6c-4b79eff1b774",
-              "name": "Delete User",
-              "request": {
-                "name": "Delete User",
-                "description": {},
-                "url": {
-                  "path": ["users", ":id"],
-                  "host": ["{{baseUrl}}"],
-                  "query": [],
-                  "variable": [{ "type": "any", "value": "<string>", "key": "id", "disabled": false }]
-                },
-                "header": [{ "key": "Accept", "value": "application/json" }],
-                "method": "DELETE",
-                "body": {},
-                "auth": null
-              },
-              "response": [
-                {
-                  "id": "7394312c-2c66-4a93-b3f5-b8b791d743d2",
-                  "name": "Ok",
-                  "originalRequest": {
-                    "url": { "path": ["users", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
-                    "header": [{ "key": "Accept", "value": "application/json" }],
-                    "method": "DELETE",
-                    "body": {}
-                  },
-                  "status": "OK",
-                  "code": 200,
-                  "header": [{ "key": "Content-Type", "value": "application/json" }],
-                  "body": "{\n  \"deleted\": \"<boolean>\"\n}",
                   "cookie": [],
                   "_postman_previewlanguage": "json"
                 }
@@ -217,12 +62,12 @@
           "description": "",
           "item": [
             {
-              "id": "fe204ad1-36ac-4a58-b197-8571d13c9958",
+              "id": "d786ce08-fe8a-4833-8a07-596ec027186f",
               "name": "Sign Up",
               "request": {
                 "name": "Sign Up",
                 "description": {},
-                "url": { "path": ["users", "sign-up"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                "url": { "path": ["user", "sign-up"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
                 "header": [
                   { "key": "Content-Type", "value": "application/json" },
                   { "key": "Accept", "value": "application/json" }
@@ -237,10 +82,10 @@
               },
               "response": [
                 {
-                  "id": "4dc0240d-baf9-46f3-992d-c9fe753a6d10",
+                  "id": "b24e9b42-1d52-4a26-ae15-23938b2212df",
                   "name": "Ok",
                   "originalRequest": {
-                    "url": { "path": ["users", "sign-up"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                    "url": { "path": ["user", "sign-up"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
                     "header": [
                       { "key": "Content-Type", "value": "application/json" },
                       { "key": "Accept", "value": "application/json" }
@@ -270,12 +115,12 @@
           "description": "",
           "item": [
             {
-              "id": "1daf98ee-bb22-4cd2-84e8-ffb102a4e29d",
+              "id": "b32e1cdf-6e1b-4bf0-968e-6708df2d7a76",
               "name": "Sign In",
               "request": {
                 "name": "Sign In",
                 "description": {},
-                "url": { "path": ["users", "sign-in"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                "url": { "path": ["user", "sign-in"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
                 "header": [
                   { "key": "Content-Type", "value": "application/json" },
                   { "key": "Accept", "value": "application/json" }
@@ -290,15 +135,68 @@
               },
               "response": [
                 {
-                  "id": "f2f46786-6c80-40bd-8f00-8d96763fba3b",
+                  "id": "4a06f02b-d7c9-41e8-b1b8-25163063cf50",
                   "name": "Ok",
                   "originalRequest": {
-                    "url": { "path": ["users", "sign-in"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                    "url": { "path": ["user", "sign-in"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
                     "header": [
                       { "key": "Content-Type", "value": "application/json" },
                       { "key": "Accept", "value": "application/json" }
                     ],
                     "method": "POST",
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
+                      "options": { "raw": { "headerFamily": "json", "language": "json" } }
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "header": [{ "key": "Content-Type", "value": "application/json" }],
+                  "body": "{\n  \"token\": \"<string>\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                }
+              ],
+              "event": [],
+              "protocolProfileBehavior": { "disableBodyPruning": true }
+            }
+          ]
+        },
+        {
+          "name": "password",
+          "description": "",
+          "item": [
+            {
+              "id": "f4a6ad34-150c-4612-99f9-2f183f027b89",
+              "name": "Update Password",
+              "request": {
+                "name": "Update Password",
+                "description": {},
+                "url": { "path": ["user", "password"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Accept", "value": "application/json" }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
+                  "options": { "raw": { "headerFamily": "json", "language": "json" } }
+                },
+                "auth": []
+              },
+              "response": [
+                {
+                  "id": "0a275cd3-9fff-4a3e-9d79-ab8a0c5223af",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "url": { "path": ["user", "password"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                    "header": [
+                      { "key": "Content-Type", "value": "application/json" },
+                      { "key": "Accept", "value": "application/json" }
+                    ],
+                    "method": "PATCH",
                     "body": {
                       "mode": "raw",
                       "raw": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\"\n}",
@@ -317,6 +215,72 @@
               "protocolProfileBehavior": { "disableBodyPruning": true }
             }
           ]
+        },
+        {
+          "id": "b20f7621-3b1c-417e-a23a-01e55db98c28",
+          "name": "Get User",
+          "request": {
+            "name": "Get User",
+            "description": {},
+            "url": { "path": ["user"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "body": {},
+            "auth": []
+          },
+          "response": [
+            {
+              "id": "fdfd17f6-bbed-42bf-9e6e-56579cfc993d",
+              "name": "Ok",
+              "originalRequest": {
+                "url": { "path": ["user"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                "header": [{ "key": "Accept", "value": "application/json" }],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"password\": \"<string>\",\n  \"username\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": { "disableBodyPruning": true }
+        },
+        {
+          "id": "4e345ee8-fe8c-470d-b22f-87440002f6da",
+          "name": "Delete User",
+          "request": {
+            "name": "Delete User",
+            "description": {},
+            "url": { "path": ["user"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "DELETE",
+            "body": {},
+            "auth": []
+          },
+          "response": [
+            {
+              "id": "a5844c67-b5ca-4861-9740-c1554080c6ec",
+              "name": "Ok",
+              "originalRequest": {
+                "url": { "path": ["user"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+                "header": [{ "key": "Accept", "value": "application/json" }],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"deleted\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": { "disableBodyPruning": true }
         }
       ]
     },
@@ -329,7 +293,7 @@
           "description": "",
           "item": [
             {
-              "id": "7d3a14da-90ec-4343-9759-f54f8d2563ad",
+              "id": "42043ee9-2e83-44b0-9de3-bc9c6295545d",
               "name": "Get Task",
               "request": {
                 "name": "Get Task",
@@ -343,11 +307,11 @@
                 "header": [{ "key": "Accept", "value": "application/json" }],
                 "method": "GET",
                 "body": {},
-                "auth": null
+                "auth": []
               },
               "response": [
                 {
-                  "id": "52fa1d68-8d19-4c49-ac7e-824c4161b415",
+                  "id": "76fd967f-d593-4556-8dc2-af708edd92e9",
                   "name": "Ok",
                   "originalRequest": {
                     "url": { "path": ["tasks", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -367,7 +331,7 @@
               "protocolProfileBehavior": { "disableBodyPruning": true }
             },
             {
-              "id": "d1cc004c-5ddb-409f-9adf-48f326a456be",
+              "id": "09e8cc65-f336-4d55-8a1a-50b072d7e562",
               "name": "Update Task",
               "request": {
                 "name": "Update Task",
@@ -388,11 +352,11 @@
                   "raw": "{\n  \"title\": \"<string>\",\n  \"listId\": \"<string>\",\n  \"completed\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
                   "options": { "raw": { "headerFamily": "json", "language": "json" } }
                 },
-                "auth": null
+                "auth": []
               },
               "response": [
                 {
-                  "id": "96a06de6-a9e9-43fe-af0e-530def716369",
+                  "id": "5f8217ee-0ead-4210-a3b5-093a6e55eddf",
                   "name": "Ok",
                   "originalRequest": {
                     "url": { "path": ["tasks", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -419,7 +383,7 @@
               "protocolProfileBehavior": { "disableBodyPruning": true }
             },
             {
-              "id": "ec43bc20-726a-4d19-8f7a-88a5b37a5b6c",
+              "id": "3b3be094-84e2-41e6-a6d6-7aeb1d48ba80",
               "name": "Delete Task",
               "request": {
                 "name": "Delete Task",
@@ -433,11 +397,11 @@
                 "header": [{ "key": "Accept", "value": "application/json" }],
                 "method": "DELETE",
                 "body": {},
-                "auth": null
+                "auth": []
               },
               "response": [
                 {
-                  "id": "68bac3c0-5a72-42a6-9a5e-530d64b2b2be",
+                  "id": "b6349422-8a57-4832-8c4a-2c1bbfe13bd2",
                   "name": "Ok",
                   "originalRequest": {
                     "url": { "path": ["tasks", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -459,7 +423,7 @@
           ]
         },
         {
-          "id": "7c52aed3-d546-43f8-8444-d008bd803069",
+          "id": "e349df71-a314-44ba-abc4-badb1e7c6f8c",
           "name": "Get Tasks",
           "request": {
             "name": "Get Tasks",
@@ -468,11 +432,11 @@
             "header": [{ "key": "Accept", "value": "application/json" }],
             "method": "GET",
             "body": {},
-            "auth": null
+            "auth": []
           },
           "response": [
             {
-              "id": "10fb1f44-8c1f-49dd-86f5-b0e7524b797f",
+              "id": "3318f60f-86f2-4646-822f-c089a7d7db24",
               "name": "Ok",
               "originalRequest": {
                 "url": { "path": ["tasks"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -492,7 +456,7 @@
           "protocolProfileBehavior": { "disableBodyPruning": true }
         },
         {
-          "id": "117062c5-6212-404e-aff6-9c56e04bfdf0",
+          "id": "6cded271-2c57-4f80-8c8a-8b4f753d4753",
           "name": "Create Task",
           "request": {
             "name": "Create Task",
@@ -508,11 +472,11 @@
               "raw": "{\n  \"title\": \"<string>\",\n  \"listId\": \"<string>\",\n  \"completed\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
               "options": { "raw": { "headerFamily": "json", "language": "json" } }
             },
-            "auth": null
+            "auth": []
           },
           "response": [
             {
-              "id": "301595d7-a9c1-4053-b613-07b58a54a2e1",
+              "id": "7c388e05-c834-4518-acc1-2ca4a5b80806",
               "name": "Ok",
               "originalRequest": {
                 "url": { "path": ["tasks"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -549,7 +513,7 @@
           "description": "",
           "item": [
             {
-              "id": "a8700c52-184c-4a5b-8e04-f2ba8870def8",
+              "id": "d67b9881-ba49-49c5-9640-b1d690e24fe4",
               "name": "Get List",
               "request": {
                 "name": "Get List",
@@ -563,11 +527,11 @@
                 "header": [{ "key": "Accept", "value": "application/json" }],
                 "method": "GET",
                 "body": {},
-                "auth": null
+                "auth": []
               },
               "response": [
                 {
-                  "id": "93f67c9f-78f7-440d-afc8-b4991b696da6",
+                  "id": "3c9b79f3-0901-4116-8979-8162259e7b91",
                   "name": "Ok",
                   "originalRequest": {
                     "url": { "path": ["lists", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -587,7 +551,7 @@
               "protocolProfileBehavior": { "disableBodyPruning": true }
             },
             {
-              "id": "9da6ff4d-b540-47c6-8715-faac195aa18c",
+              "id": "2acda7d9-b29a-42e7-a401-44896a7dfd28",
               "name": "Update List",
               "request": {
                 "name": "Update List",
@@ -605,14 +569,14 @@
                 "method": "PATCH",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"userId\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+                  "raw": "{\n  \"title\": \"<string>\"\n}",
                   "options": { "raw": { "headerFamily": "json", "language": "json" } }
                 },
-                "auth": null
+                "auth": []
               },
               "response": [
                 {
-                  "id": "496a01e7-0b36-41d2-bfc1-609363f2afec",
+                  "id": "8578791c-09e3-4e2a-9325-46478069fe66",
                   "name": "Ok",
                   "originalRequest": {
                     "url": { "path": ["lists", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -623,7 +587,7 @@
                     "method": "PATCH",
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n  \"userId\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+                      "raw": "{\n  \"title\": \"<string>\"\n}",
                       "options": { "raw": { "headerFamily": "json", "language": "json" } }
                     }
                   },
@@ -639,7 +603,7 @@
               "protocolProfileBehavior": { "disableBodyPruning": true }
             },
             {
-              "id": "9b0a91a0-4c5c-47ca-b3a2-b9d42eb7d7a5",
+              "id": "7ffc826b-e96c-45ee-8123-70aa43bd52b9",
               "name": "Delete List",
               "request": {
                 "name": "Delete List",
@@ -653,11 +617,11 @@
                 "header": [{ "key": "Accept", "value": "application/json" }],
                 "method": "DELETE",
                 "body": {},
-                "auth": null
+                "auth": []
               },
               "response": [
                 {
-                  "id": "10dd1b7d-4036-444f-80fe-3640cd3ad24f",
+                  "id": "c1a0e88c-a420-4945-9bd1-3e3331f989e6",
                   "name": "Ok",
                   "originalRequest": {
                     "url": { "path": ["lists", ":id"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -679,7 +643,7 @@
           ]
         },
         {
-          "id": "bebcf5fd-abd0-46bd-b50f-8715853f6300",
+          "id": "d8c2ea0c-2ec8-4a6e-a38c-34e12f47607d",
           "name": "Get Lists",
           "request": {
             "name": "Get Lists",
@@ -688,11 +652,11 @@
             "header": [{ "key": "Accept", "value": "application/json" }],
             "method": "GET",
             "body": {},
-            "auth": null
+            "auth": []
           },
           "response": [
             {
-              "id": "f2d9484a-fd25-4683-b10c-08595346e2fe",
+              "id": "255fa6cc-f1ea-4503-9832-9745ed15ea56",
               "name": "Ok",
               "originalRequest": {
                 "url": { "path": ["lists"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -712,7 +676,7 @@
           "protocolProfileBehavior": { "disableBodyPruning": true }
         },
         {
-          "id": "a7e81493-9892-4108-b547-89915ef9853c",
+          "id": "05790832-9bba-4e7d-bef9-83b5cd9ceaa1",
           "name": "Create List",
           "request": {
             "name": "Create List",
@@ -725,14 +689,14 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"userId\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+              "raw": "{\n  \"title\": \"<string>\"\n}",
               "options": { "raw": { "headerFamily": "json", "language": "json" } }
             },
-            "auth": null
+            "auth": []
           },
           "response": [
             {
-              "id": "6e586088-5395-4041-968f-b967627764eb",
+              "id": "f5e7eb8a-56f8-4a09-b19f-a7459128387e",
               "name": "Ok",
               "originalRequest": {
                 "url": { "path": ["lists"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -743,7 +707,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"userId\": \"<string>\",\n  \"title\": \"<string>\"\n}",
+                  "raw": "{\n  \"title\": \"<string>\"\n}",
                   "options": { "raw": { "headerFamily": "json", "language": "json" } }
                 }
               },
@@ -765,7 +729,7 @@
       "description": "",
       "item": [
         {
-          "id": "41450839-e3d8-486c-9820-adf35bc4982c",
+          "id": "c4eb2370-1547-4af7-96b8-c4c5d2ac3eb4",
           "name": "Get Health",
           "request": {
             "name": "Get Health",
@@ -778,7 +742,7 @@
           },
           "response": [
             {
-              "id": "e379a4f2-a7a7-45da-a08e-ff8329ad1f55",
+              "id": "550a2301-80c9-4856-ac07-bf6482f06a91",
               "name": "Ok",
               "originalRequest": {
                 "url": { "path": ["health"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
@@ -803,7 +767,7 @@
   "event": [],
   "variable": [{ "key": "baseUrl", "value": "http://localhost:8080" }],
   "info": {
-    "_postman_id": "603a08ef-a999-498e-bc91-66ffeee8e874",
+    "_postman_id": "513d38bf-68a8-4841-9c7c-9774fbbdd3fb",
     "name": "@express/api",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

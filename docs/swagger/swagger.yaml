@@ -15,8 +15,7 @@ components:
           type: object,
           description: 'Model List',
         },
-      ListRequest:
-        { properties: { userId: { type: string }, title: { type: string } }, required: [userId, title], type: object },
+      ListRequest: { properties: { title: { type: string } }, required: [title], type: object },
       Task:
         {
           properties:
@@ -57,7 +56,30 @@ components:
           type: object,
         },
     }
-  securitySchemes: {}
+  securitySchemes:
+    {
+      api_key: { type: apiKey, name: access_token, in: query },
+      tsoa_auth:
+        {
+          type: oauth2,
+          flows:
+            {
+              implicit:
+                {
+                  authorizationUrl: 'http://swagger.io/api/oauth/dialog',
+                  scopes:
+                    {
+                      'lists:read': 'read lists',
+                      'lists:write': 'modify lists',
+                      'tasks:read': 'read tasks',
+                      'tasks:write': 'modify tasks',
+                      'users:read': 'read users',
+                      'users:write': 'modify users',
+                    },
+                },
+            },
+        },
+    }
 info:
   title: '@express/api'
   version: 0.0.1
@@ -99,7 +121,7 @@ paths:
                 },
             },
           tags: [Lists],
-          security: [],
+          security: [{ jwt: ['lists:read'] }],
           parameters: [],
         },
       post:
@@ -111,7 +133,7 @@ paths:
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/List' } } } },
             },
           tags: [Lists],
-          security: [],
+          security: [{ jwt: ['lists:write'] }],
           parameters: [],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ListRequest' } } } },
@@ -128,7 +150,7 @@ paths:
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/List' } } } },
             },
           tags: [Lists],
-          security: [],
+          security: [{ jwt: ['lists:read'] }],
           parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
         },
       patch:
@@ -140,7 +162,7 @@ paths:
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/List' } } } },
             },
           tags: [Lists],
-          security: [],
+          security: [{ jwt: ['lists:write'] }],
           parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ListRequest' } } } },
@@ -161,7 +183,7 @@ paths:
                 },
             },
           tags: [Lists],
-          security: [],
+          security: [{ jwt: ['lists:write'] }],
           parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
         },
     }
@@ -180,7 +202,7 @@ paths:
                 },
             },
           tags: [Tasks],
-          security: [],
+          security: [{ jwt: ['tasks:read'] }],
           parameters: [],
         },
       post:
@@ -192,7 +214,7 @@ paths:
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/Task' } } } },
             },
           tags: [Tasks],
-          security: [],
+          security: [{ jwt: ['tasks:write'] }],
           parameters: [],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/TaskRequest' } } } },
@@ -209,7 +231,7 @@ paths:
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/Task' } } } },
             },
           tags: [Tasks],
-          security: [],
+          security: [{ jwt: ['tasks:read'] }],
           parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
         },
       patch:
@@ -221,7 +243,7 @@ paths:
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/Task' } } } },
             },
           tags: [Tasks],
-          security: [],
+          security: [{ jwt: ['tasks:write'] }],
           parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/TaskRequest' } } } },
@@ -242,11 +264,11 @@ paths:
                 },
             },
           tags: [Tasks],
-          security: [],
+          security: [{ jwt: ['tasks:write'] }],
           parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
         },
     }
-  /users/sign-up:
+  /user/sign-up:
     {
       post:
         {
@@ -256,14 +278,14 @@ paths:
               '200':
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/User' } } } },
             },
-          tags: [Users],
+          tags: [User],
           security: [],
           parameters: [],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/UserRequest' } } } },
         },
     }
-  /users/sign-in:
+  /user/sign-in:
     {
       post:
         {
@@ -271,16 +293,23 @@ paths:
           responses:
             {
               '200':
-                { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/User' } } } },
+                {
+                  description: Ok,
+                  content:
+                    {
+                      application/json:
+                        { schema: { properties: { token: { type: string } }, required: [token], type: object } },
+                    },
+                },
             },
-          tags: [Users],
+          tags: [User],
           security: [],
           parameters: [],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/UserRequest' } } } },
         },
     }
-  '/users/{id}':
+  /user:
     {
       get:
         {
@@ -290,9 +319,9 @@ paths:
               '200':
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/User' } } } },
             },
-          tags: [Users],
-          security: [],
-          parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
+          tags: [User],
+          security: [{ jwt: ['users:read'] }],
+          parameters: [],
         },
       delete:
         {
@@ -309,12 +338,12 @@ paths:
                     },
                 },
             },
-          tags: [Users],
-          security: [],
-          parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
+          tags: [User],
+          security: [{ jwt: ['users:write'] }],
+          parameters: [],
         },
     }
-  '/users/{id}/username':
+  /user/username:
     {
       patch:
         {
@@ -324,14 +353,14 @@ paths:
               '200':
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/User' } } } },
             },
-          tags: [Users],
-          security: [],
-          parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
+          tags: [User],
+          security: [{ jwt: ['users:write'] }],
+          parameters: [],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/UserRequest' } } } },
         },
     }
-  '/users/{id}/password':
+  /user/password:
     {
       patch:
         {
@@ -341,9 +370,9 @@ paths:
               '200':
                 { description: Ok, content: { application/json: { schema: { $ref: '#/components/schemas/User' } } } },
             },
-          tags: [Users],
-          security: [],
-          parameters: [{ in: path, name: id, required: true, schema: { type: string } }],
+          tags: [User],
+          security: [{ jwt: ['users:write'] }],
+          parameters: [],
           requestBody:
             { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/UserRequest' } } } },
         },

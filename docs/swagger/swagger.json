@@ -36,14 +36,11 @@
       },
       "ListRequest": {
         "properties": {
-          "userId": {
-            "type": "string"
-          },
           "title": {
             "type": "string"
           }
         },
-        "required": ["userId", "title"],
+        "required": ["title"],
         "type": "object"
       },
       "Task": {
@@ -115,7 +112,29 @@
         "type": "object"
       }
     },
-    "securitySchemes": {}
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "access_token",
+        "in": "query"
+      },
+      "tsoa_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+            "scopes": {
+              "lists:read": "read lists",
+              "lists:write": "modify lists",
+              "tasks:read": "read tasks",
+              "tasks:write": "modify tasks",
+              "users:read": "read users",
+              "users:write": "modify users"
+            }
+          }
+        }
+      }
+    }
   },
   "info": {
     "title": "@express/api",
@@ -170,7 +189,11 @@
           }
         },
         "tags": ["Lists"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["lists:read"]
+          }
+        ],
         "parameters": []
       },
       "post": {
@@ -188,7 +211,11 @@
           }
         },
         "tags": ["Lists"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["lists:write"]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -218,7 +245,11 @@
           }
         },
         "tags": ["Lists"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["lists:read"]
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -245,7 +276,11 @@
           }
         },
         "tags": ["Lists"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["lists:write"]
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -288,7 +323,11 @@
           }
         },
         "tags": ["Lists"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["lists:write"]
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -320,7 +359,11 @@
           }
         },
         "tags": ["Tasks"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["tasks:read"]
+          }
+        ],
         "parameters": []
       },
       "post": {
@@ -338,7 +381,11 @@
           }
         },
         "tags": ["Tasks"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["tasks:write"]
+          }
+        ],
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -368,7 +415,11 @@
           }
         },
         "tags": ["Tasks"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["tasks:read"]
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -395,7 +446,11 @@
           }
         },
         "tags": ["Tasks"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["tasks:write"]
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -438,7 +493,11 @@
           }
         },
         "tags": ["Tasks"],
-        "security": [],
+        "security": [
+          {
+            "jwt": ["tasks:write"]
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -451,7 +510,7 @@
         ]
       }
     },
-    "/users/sign-up": {
+    "/user/sign-up": {
       "post": {
         "operationId": "SignUp",
         "responses": {
@@ -466,7 +525,7 @@
             }
           }
         },
-        "tags": ["Users"],
+        "tags": ["User"],
         "security": [],
         "parameters": [],
         "requestBody": {
@@ -481,7 +540,7 @@
         }
       }
     },
-    "/users/sign-in": {
+    "/user/sign-in": {
       "post": {
         "operationId": "SignIn",
         "responses": {
@@ -490,13 +549,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["token"],
+                  "type": "object"
                 }
               }
             }
           }
         },
-        "tags": ["Users"],
+        "tags": ["User"],
         "security": [],
         "parameters": [],
         "requestBody": {
@@ -511,7 +576,7 @@
         }
       }
     },
-    "/users/{id}": {
+    "/user": {
       "get": {
         "operationId": "GetUser",
         "responses": {
@@ -526,18 +591,13 @@
             }
           }
         },
-        "tags": ["Users"],
-        "security": [],
-        "parameters": [
+        "tags": ["User"],
+        "security": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "jwt": ["users:read"]
           }
-        ]
+        ],
+        "parameters": []
       },
       "delete": {
         "operationId": "DeleteUser",
@@ -559,21 +619,16 @@
             }
           }
         },
-        "tags": ["Users"],
-        "security": [],
-        "parameters": [
+        "tags": ["User"],
+        "security": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "jwt": ["users:write"]
           }
-        ]
+        ],
+        "parameters": []
       }
     },
-    "/users/{id}/username": {
+    "/user/username": {
       "patch": {
         "operationId": "UpdateUsername",
         "responses": {
@@ -588,18 +643,13 @@
             }
           }
         },
-        "tags": ["Users"],
-        "security": [],
-        "parameters": [
+        "tags": ["User"],
+        "security": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "jwt": ["users:write"]
           }
         ],
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -612,7 +662,7 @@
         }
       }
     },
-    "/users/{id}/password": {
+    "/user/password": {
       "patch": {
         "operationId": "UpdatePassword",
         "responses": {
@@ -627,18 +677,13 @@
             }
           }
         },
-        "tags": ["Users"],
-        "security": [],
-        "parameters": [
+        "tags": ["User"],
+        "security": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "jwt": ["users:write"]
           }
         ],
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {

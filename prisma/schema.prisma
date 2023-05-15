@@ -24,6 +24,8 @@ model List {
   user    User    @relation(fields: [userId], references: [id])
   userId  String
   Task    Task[]
+
+  @@unique([id, userId])
 }
 
 model Task {
@@ -33,4 +35,6 @@ model Task {
   completed   Boolean
   list        List    @relation(fields: [listId], references: [id])
   listId      String
+
+  @@unique([id, listId])
 }

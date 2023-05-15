@@ -1,7 +1,9 @@
 import { User } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { v4 } from 'uuid';
+import jwt from 'jsonwebtoken';
 import { prismaClient } from '../../common/libs/prisma';
+import { JWT_SECRET } from '../../common/environments';
 
 const SALT_OR_ROUNDS = 10;
 
@@ -15,11 +17,17 @@ export const getUser = async (id: string): Promise<User> => {
   return user;
 };
 
-export const signIn = async ({ username = '', password = '' }: UserRequest): Promise<User> => {
+export const signIn = async ({ username = '', password = '' }: UserRequest): Promise<{ token: string }> => {
   const user: User = await prismaClient.user.findFirstOrThrow({ where: { username } });
-  const { password: hash } = user;
+  const { id: user_id, password: hash } = user;
   const isMatch = await bcrypt.compare(password, hash);
-  if (isMatch) return user;
+  if (isMatch) {
+    const token: string = jwt.sign(
+      { user_id, scopes: ['lists:read', 'lists:write', 'tasks:read', 'tasks:write', 'users:read', 'users:write'] },
+      JWT_SECRET
+    );
+    return { token };
+  }
   throw new Error('Login Error');
 };
 
