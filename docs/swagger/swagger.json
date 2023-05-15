@@ -6,6 +6,40 @@
     "requestBodies": {},
     "responses": {},
     "schemas": {
+      "Pick_User.id-or-username_": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "username"],
+        "type": "object",
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      },
+      "UserRequest": {
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": ["password", "username"],
+        "type": "object"
+      },
+      "TokenResponse": {
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": ["token"],
+        "type": "object"
+      },
       "HealthResponse": {
         "properties": {
           "status": {
@@ -82,34 +116,6 @@
         },
         "required": ["title", "listId"],
         "type": "object"
-      },
-      "User": {
-        "properties": {
-          "password": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          }
-        },
-        "required": ["password", "username", "id"],
-        "type": "object",
-        "description": "Model User"
-      },
-      "UserRequest": {
-        "properties": {
-          "password": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          }
-        },
-        "required": ["password", "username"],
-        "type": "object"
       }
     },
     "securitySchemes": {
@@ -118,20 +124,14 @@
         "name": "access_token",
         "in": "query"
       },
-      "tsoa_auth": {
-        "type": "oauth2",
-        "flows": {
-          "implicit": {
-            "authorizationUrl": "http://swagger.io/api/oauth/dialog",
-            "scopes": {
-              "lists:read": "read lists",
-              "lists:write": "modify lists",
-              "tasks:read": "read tasks",
-              "tasks:write": "modify tasks",
-              "users:read": "read users",
-              "users:write": "modify users"
-            }
-          }
+      "jwt": {
+        "scopes": {
+          "lists:read": "read lists",
+          "lists:write": "modify lists",
+          "tasks:read": "read tasks",
+          "tasks:write": "modify tasks",
+          "users:read": "read users",
+          "users:write": "modify users"
         }
       }
     }
@@ -150,6 +150,66 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/auth/sign-up": {
+      "post": {
+        "operationId": "SignUp",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pick_User.id-or-username_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Auth"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/sign-in": {
+      "post": {
+        "operationId": "SignIn",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Auth"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "operationId": "GetHealth",
@@ -305,21 +365,8 @@
       "delete": {
         "operationId": "DeleteList",
         "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "deleted": {
-                      "type": "boolean"
-                    }
-                  },
-                  "required": ["deleted"],
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "No content"
           }
         },
         "tags": ["Lists"],
@@ -510,72 +557,6 @@
         ]
       }
     },
-    "/user/sign-up": {
-      "post": {
-        "operationId": "SignUp",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["User"],
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/user/sign-in": {
-      "post": {
-        "operationId": "SignIn",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "token": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["token"],
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["User"],
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserRequest"
-              }
-            }
-          }
-        }
-      }
-    },
     "/user": {
       "get": {
         "operationId": "GetUser",
@@ -585,7 +566,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Pick_User.id-or-username_"
                 }
               }
             }
@@ -602,21 +583,8 @@
       "delete": {
         "operationId": "DeleteUser",
         "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "deleted": {
-                      "type": "boolean"
-                    }
-                  },
-                  "required": ["deleted"],
-                  "type": "object"
-                }
-              }
-            }
+          "204": {
+            "description": "No content"
           }
         },
         "tags": ["User"],
@@ -637,7 +605,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Pick_User.id-or-username_"
                 }
               }
             }
@@ -671,7 +639,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Pick_User.id-or-username_"
                 }
               }
             }

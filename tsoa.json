@@ -19,10 +19,7 @@
         "name": "access_token",
         "in": "query"
       },
-      "tsoa_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "http://swagger.io/api/oauth/dialog",
-        "flow": "implicit",
+      "jwt": {
         "scopes": {
           "lists:read": "read lists",
           "lists:write": "modify lists",

@@ -9,31 +9,33 @@ export type TaskRequest = {
   completed?: boolean;
 };
 
-export const getTasks = async () => {
-  const tasks: Task[] = await prismaClient.task.findMany();
-  return tasks;
-};
+export class TasksService {
+  async getTasks() {
+    const tasks: Task[] = await prismaClient.task.findMany();
+    return tasks;
+  }
 
-export const createTask = async ({ title, description = '', listId }: TaskRequest): Promise<Task> => {
-  const id = v4();
-  const task: Task = await prismaClient.task.create({ data: { id, title, description, completed: false, listId } });
-  return task;
-};
+  async createTask({ title, description = '', listId }: TaskRequest): Promise<Task> {
+    const id = v4();
+    const task: Task = await prismaClient.task.create({ data: { id, title, description, completed: false, listId } });
+    return task;
+  }
 
-export const getTask = async (id: string): Promise<Task> => {
-  const task: Task = await prismaClient.task.findFirstOrThrow({ where: { id } });
-  return task;
-};
+  async getTask(id: string): Promise<Task> {
+    const task: Task = await prismaClient.task.findFirstOrThrow({ where: { id } });
+    return task;
+  }
 
-export const updateTask = async (
-  id: string,
-  { title, description = '', completed = false, listId }: TaskRequest
-): Promise<Task> => {
-  const task: Task = await prismaClient.task.update({ data: { title, description, completed, listId }, where: { id } });
-  return task;
-};
+  async updateTask(id: string, { title, description = '', completed = false, listId }: TaskRequest): Promise<Task> {
+    const task: Task = await prismaClient.task.update({
+      data: { title, description, completed, listId },
+      where: { id },
+    });
+    return task;
+  }
 
-export const deleteTask = async (id: string) => {
-  await prismaClient.task.delete({ where: { id } });
-  return { deleted: true };
-};
+  async deleteTask(id: string) {
+    await prismaClient.task.delete({ where: { id } });
+    return { deleted: true };
+  }
+}

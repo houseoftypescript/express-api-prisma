@@ -3,4 +3,5 @@
 
 yarn lint
 yarn prettier . --write
+git add -A
 yarn pretty-quick --staged
