@@ -13,7 +13,7 @@
     "yarn": "1.22.19"
   },
   "scripts": {
-    "prebuild": "rimraf dist && yarn docs:swagger:html",
+    "prebuild": "rimraf dist && prisma generate && yarn docs:swagger:html",
     "build": "webpack --mode=production",
     "start": "node .",
     "start:dev": "kill-port 8080 && concurrently \"nodemon\" \"nodemon -x yarn docs\"",
