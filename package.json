@@ -32,7 +32,7 @@
     "prepare": "husky install || true"
   },
   "dependencies": {
-    "@prisma/client": "4.13.0",
+    "@prisma/client": "4.14.0",
     "bcrypt": "5.1.0",
     "compression": "1.7.4",
     "cookie-parser": "1.4.6",
