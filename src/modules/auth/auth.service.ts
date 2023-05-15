@@ -5,13 +5,13 @@ import { v4 } from 'uuid';
 import { JWT_SECRET, SALT_OR_ROUNDS } from '../../common/environments';
 import { prismaClient } from '../../common/libs/prisma';
 
-export type TokenRequest = { username: string; password: string };
+export type TokenRequest = { email: string; username: string; password: string };
 
 export type TokenResponse = { token: string };
 
 export class AuthService {
-  async signIn({ username = '', password = '' }: TokenRequest): Promise<{ token: string }> {
-    const user: User = await prismaClient.user.findFirstOrThrow({ where: { username } });
+  async signIn({ email = '', username = '', password = '' }: TokenRequest): Promise<{ token: string }> {
+    const user: User = await prismaClient.user.findFirstOrThrow({ where: { OR: [{ username }, { email }] } });
     const { id: user_id, password: hash } = user;
     const isMatch = await bcrypt.compare(password, hash);
     if (isMatch) {
@@ -22,11 +22,11 @@ export class AuthService {
     throw new Error('Login Error');
   }
 
-  async signUp({ username, password }: TokenRequest): Promise<Pick<User, 'id' | 'username'>> {
+  async signUp({ email = '', username = '', password = '' }: TokenRequest): Promise<Pick<User, 'id' | 'username'>> {
     const id: string = v4();
     const hash: string = await bcrypt.hash(password, SALT_OR_ROUNDS);
     const user: Pick<User, 'id' | 'username'> = await prismaClient.user.create({
-      data: { id, username, password: hash },
+      data: { id, email, username, password: hash },
       select: { id: true, username: true },
     });
     const { id: userId } = user;
