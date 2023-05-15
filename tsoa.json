@@ -14,7 +14,5 @@
       ]
     }
   },
-  "routes": {
-    "routesDir": "src"
-  }
+  "routes": { "routesDir": "src" }
 }

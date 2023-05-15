@@ -7,5 +7,30 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRESQL_URL")
+}
+
+model User {
+  id       String @id
+  username String @unique
+  password String
+  List     List[]
+}
+
+model List {
+  id      String  @id
+  title   String
+  primary Boolean
+  user    User    @relation(fields: [userId], references: [id])
+  userId  String
+  Task    Task[]
+}
+
+model Task {
+  id          String  @id
+  title       String
+  description String
+  completed   Boolean
+  list        List    @relation(fields: [listId], references: [id])
+  listId      String
 }

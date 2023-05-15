@@ -20,7 +20,7 @@ app.use(urlencoded({ extended: true }));
 
 RegisterRoutes(app);
 
-app.use(notFoundHandler({ whitelist: ['/graphql'] }));
+app.use(notFoundHandler());
 app.use(errorHandler);
 
 export default app;

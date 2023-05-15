@@ -2,6 +2,7 @@ import http from 'http';
 import { HttpError } from 'http-errors';
 import app from './app';
 import logger from './common/libs/logger';
+import { prismaClient } from './common/libs/prisma';
 
 const normalizePort = (val: string): string | number | boolean => {
   const portOrPipe = parseInt(val, 10);
@@ -20,6 +21,7 @@ const normalizePort = (val: string): string | number | boolean => {
 };
 
 const main = async () => {
+  await prismaClient.$connect();
   // Port
   const port = normalizePort(process.env.PORT || '8080');
   app.set('port', port);
@@ -28,11 +30,9 @@ const main = async () => {
   httpServer.listen(port);
   httpServer.on('listening', () => {
     const address = httpServer.address();
-    const bind =
-      typeof address === 'string' ? 'pipe ' + address : 'port ' + address?.port;
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address?.port;
     logger.info(`🚀 Server is listening on ${bind}`);
   });
-
   httpServer.on('error', (error: HttpError) => {
     if (error.syscall !== 'listen') {
       throw error;

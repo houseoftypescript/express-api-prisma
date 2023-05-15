@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 export const notFoundHandler =
-  ({ whitelist = [] }: { whitelist: string[] } = { whitelist: [] }) =>
+  ({ whitelist = [] }: { whitelist?: string[] } = { whitelist: [] }) =>
   (request: Request, response: Response, next: NextFunction) => {
     const { path } = request;
     if (whitelist.includes(path)) {
