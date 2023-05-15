@@ -21,10 +21,7 @@ jobs:
           node-version: '20.1.0'
       - name: Install Dependencies
         run: yarn install --network-timeout 86400000
-        working-directory: ${{ matrix.project.working-directory }}
-      - name: Unit Test
-        run: yarn test
-        working-directory: ${{ matrix.project.working-directory }}
       - name: Build Production
         run: yarn build
-        working-directory: ${{ matrix.project.working-directory }}
+      - name: Unit Test
+        run: yarn test

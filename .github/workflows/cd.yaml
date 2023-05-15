@@ -18,7 +18,7 @@ jobs:
           node-version: '20.1.0'
       - name: Install Dependencies
         run: yarn install --network-timeout 86400000
-      - name: Unit Test
-        run: yarn test
       - name: Build Production
         run: yarn build
+      - name: Unit Test
+        run: yarn test
