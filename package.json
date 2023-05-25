@@ -51,7 +51,7 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
-    "@redocly/cli": "1.0.0-beta.126",
+    "@redocly/cli": "1.0.0-beta.127",
     "@types/bcrypt": "5.0.0",
     "@types/compression": "1.7.2",
     "@types/cookie-parser": "1.4.3",
