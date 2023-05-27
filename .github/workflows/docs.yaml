@@ -21,7 +21,7 @@ jobs:
       - name: Build API Docs
         run: yarn docs:swagger:html
       - name: Deploy GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
           token: ${{ secrets.GHP_TOKEN }}
           branch: gh-pages
