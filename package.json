@@ -1,9 +1,9 @@
 {
-  "name": "@express/api",
+  "name": "@express/prisma",
   "version": "0.0.1",
-  "description": "express.js - apis",
+  "description": "express.js - prisma",
   "main": "dist/server.js",
-  "repository": "git@github.com:houseoftypescript/express-api-template.git",
+  "repository": "git@github.com:houseoftypescript/express-api-prisma.git",
   "author": "hieudoanm <hieumdoan@gmail.com>",
   "license": "GNU GPL 3.0",
   "private": true,
