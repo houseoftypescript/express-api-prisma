@@ -10,7 +10,7 @@ export type TaskRequest = {
 };
 
 export class TasksService {
-  async getTasks() {
+  async getTasks(): Promise<Task[]> {
     const tasks: Task[] = await prismaClient.task.findMany();
     return tasks;
   }
@@ -34,8 +34,7 @@ export class TasksService {
     return task;
   }
 
-  async deleteTask(id: string) {
+  async deleteTask(id: string): Promise<void> {
     await prismaClient.task.delete({ where: { id } });
-    return { deleted: true };
   }
 }

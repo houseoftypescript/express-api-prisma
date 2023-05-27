@@ -1,5 +1,5 @@
 import { Task } from '@prisma/client';
-import { Body, Controller, Delete, Get, Patch, Path, Post, Route, Security, Tags } from 'tsoa';
+import { Body, Controller, Delete, Get, Patch, Path, Post, Route, Security, SuccessResponse, Tags } from 'tsoa';
 import { TaskRequest, TasksService } from './tasks.service';
 
 @Route('/tasks')
@@ -37,8 +37,9 @@ export class TasksController extends Controller {
   }
 
   @Security('jwt', ['tasks:write'])
+  @SuccessResponse(204)
   @Delete('{id}')
-  async deleteTask(@Path() id: string): Promise<{ deleted: boolean }> {
+  async deleteTask(@Path() id: string): Promise<void> {
     return this.tasksService.deleteTask(id);
   }
 }
