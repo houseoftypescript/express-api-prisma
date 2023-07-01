@@ -3,6 +3,5 @@
 
 yarn lint
 yarn prisma format
-yarn pretty-quick --staged
 yarn prettier . --write
 git add -A
