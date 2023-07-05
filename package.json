@@ -41,7 +41,7 @@
     "jsonwebtoken": "9.0.0",
     "morgan": "1.10.0",
     "pino": "8.14.1",
-    "pino-pretty": "10.0.0",
+    "pino-pretty": "10.0.1",
     "tsoa": "5.1.1",
     "uuid": "9.0.0"
   },
