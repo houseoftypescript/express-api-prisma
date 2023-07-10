@@ -52,7 +52,7 @@
     "@types/cookie-parser": "1.4.3",
     "@types/cors": "2.8.13",
     "@types/http-errors": "2.0.1",
-    "@types/jest": "29.5.2",
+    "@types/jest": "29.5.3",
     "@types/jsonwebtoken": "9.0.2",
     "@types/morgan": "1.9.4",
     "@types/node": "20.4.1",
